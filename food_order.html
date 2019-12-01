@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>beta</title>
+<script>
+var sum=0;
+function hide_alert(){
+    document.getElementById("alert").style.visibility="hidden";
+}
+function calc(cBox) {
+    if(cBox.checked) {        
+        document.querySelector("#alert .info").innerHTML=cBox.name + "를 선택하셨습니다! ";
+        document.getElementById("alert").style.visibility="visible";        
+        sum += parseInt(cBox.value);
+    }
+    else { 
+        document.querySelector("#alert .info").innerHTML="취소되셨습니다! ";
+        document.getElementById("alert").style.visibility="visible";
+        sum -= parseInt(cBox.value);
+    }    
+    document.getElementById("sumtext").value =sum.toLocaleString();
+    show_orders();
+}
+function show_orders(){
+    let menus=document.querySelectorAll("input[type='checkbox']");
+    let s_all="";
+    menus.forEach((menu)=>{
+        if (menu.checked != "") {
+            s_all += menu.name +"("+parseInt(menu.value).toLocaleString()+")"+"\n";
+        }
+    
+    });
+    document.getElementById("order_list").value= s_all;
+}
+function clear_checks(){
+    window.scrollTo(0,0)
+    let menus=document.querySelectorAll("input[type='checkbox'][onclick='calc(this)']");
+    menus.forEach((menu)=>{
+        menu.checked = "";
+    });
+    document.getElementById("order_list").value= "";
+    document.getElementById("sumtext").value = "";
+}
+</script>
+<style>
+    .mainA {
+        font-size : 45px;
+        color : gold;
+    }
+    .title {
+            font-size : 30px;
+            color : brown;
+        }
+    .slt {
+        font-size : 20px;
+    }
+        #menubar {
+            background : burlywood;
+        }
+        #menubar ul {
+            margin : 0;
+            padding : 0;
+            width : 567px;
+        }
+        #menubar ul li {
+            display : inline-block;
+            padding : 0px 15px;
+        }
+        #menubar ul li a {
+            font-size : 24px;
+            color : black;
+        }
+        #menubar ul li a:hover {
+            color : blue;
+        }
+        #JM {
+            position : fixed;
+            top : 10px;
+            right : 10px;
+            width : 300px;
+            padding : 5px;
+            background : gray;
+            font-size : 34px;
+            color : red;
+        }
+        #alert{
+            position: fixed;
+            top : 20px;
+            left : 400px;
+            width : 400px;
+            height: 150px;
+            padding : 5px;
+            background : lightgray;
+            border-style: outset;
+            border-width: 3px;
+            font-size : 24px;
+            color : black;
+            z-index: 999;
+            visibility:hidden;
+            text-align:center;
+            
+        }
+</style>
+</head>
+<body id="parent" onload="clear_checks()">
+    <div id="alert">
+        <p class="info" >&nbsp;</p>
+        <p><button onclick="hide_alert()">확인</button></p>
+    </div>
+    <h3 class="title">돈가스 가계</h3>
+        <nav id="menubar">
+            <ul>
+                <li><a href="#A1">점심메뉴</a></li>
+                <li><a href="#B1">저녁메뉴</a></li>
+                <li><a href="#C1">음료</a></li>
+                <li><a href="#D1">추가메뉴</a></li>
+            </ul>
+        </nav>
+<form>
+    <table>
+        <th>
+            <h3 class="mainA" id="A1">&#91;점심메뉴&#93;</h3><hr>
+        </th>
+        <tbody>
+            <tr class="slt">
+                <td><img src="https://i.ibb.co/vBsNg8V/A1.png"><br><input type="checkbox" name="돈가스 정식" value="7000" onclick="calc(this)">돈가스 정식 (7000원)</td>
+                <td><img src="https://i.ibb.co/6b8Dqcn/A2.png"><br><input type="checkbox" name="치즈 돈가스" value="8000" onclick="calc(this)">치즈 돈가스 (8000원)</td>
+                <td><img src="https://i.ibb.co/YpgC509/A3.png"><br><input type="checkbox" name="매운 돈가스" value="8000" onclick="calc(this)">매운 돈가스 (8000원)</td>
+                <td><img src="https://i.ibb.co/Wzt0gM4/A4.png"><br><input type="checkbox" name="큰 돈가스" value="8300" onclick="calc(this)">큰 돈가스 (8300원)</td>
+            </tr>
+            <tr class="slt">
+                <td><img src="https://i.ibb.co/VpP8WLS/A5.png"><br><input type="checkbox" name="떡볶이" value="3500" onclick="calc(this)">떡볶이 (3500원)</td>
+                <td><img src="https://i.ibb.co/GP8vJZn/A6.png"><br><input type="checkbox" name="치즈 떡볶이" value="4000" onclick="calc(this)">치즈 떡볶이(4000원)</td>
+                <td><img src="https://i.ibb.co/Mghz7T2/A7.png"><br><input type="checkbox" name="쫄면" value="6000" onclick="calc(this)">쫄면 (6000원)</td>
+                <td><img src="https://i.ibb.co/dmr5mWy/A8.png"><br><input type="checkbox" name="오므라이스" value="6500" onclick="calc(this)">오므라이스 (6500원)</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <th>
+                <h3 class="mainA" id="B1">&#91;저녁메뉴&#93;</h3><hr>
+            </th>
+                <tr class="slt">
+                    <td><img src="https://i.ibb.co/vBsNg8V/A1.png"><br><input type="checkbox" name="돈가스 정식" value="7000" onclick="calc(this)">돈가스 정식 (7000원)</td>
+                    <td><img src="https://i.ibb.co/6b8Dqcn/A2.png"><br><input type="checkbox" name="치즈 돈가스" value="8000" onclick="calc(this)">치즈 돈가스 (8000원)</td>
+                    <td><img src="https://i.ibb.co/YpgC509/A3.png"><br><input type="checkbox" name="매운 돈가스" value="8000" onclick="calc(this)">매운 돈가스 (8000원)</td>
+                    <td><img src="https://i.ibb.co/Wzt0gM4/A4.png"><br><input type="checkbox" name="큰 돈가스" value="8300" onclick="calc(this)">큰 돈가스 (8300원)</td>
+                </tr>
+                <tr class="slt">
+                    <td><img src="https://i.ibb.co/Mghz7T2/A7.png"><br><input type="checkbox" name="쫄면" value="6000" onclick="calc(this)">쫄면 (6000원)</td>
+                    <td><img src="https://i.ibb.co/NC9BVC4/B1.png"><br><input type="checkbox" name="김치찌개" value="8000" onclick="calc(this)">김치찌개(8000원)</td>
+                    <td><img src="https://i.ibb.co/64jqjCs/B2.png"><br><input type="checkbox" name="설렁탕" value="8000" onclick="calc(this)">설렁탕 (8000원)</td>
+                    <td><img src="https://i.ibb.co/jGgQkqF/B3.png"><br><input type="checkbox" name="제육볶음" value="6500" onclick="calc(this)">제육볶음 (6500원)</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <th>
+                    <h3 class="mainA" id="C1">&#91;음료&#93;</h3><hr>
+                </th>
+                    <tr class="slt">
+                        <td><img src="https://i.ibb.co/q0fmKfY/C1.png"><br><input type="checkbox" name="콜라" value="1500" onclick="calc(this)">콜라 (1500원)</td>
+                        <td><img src="https://i.ibb.co/CH5jrr1/C2.png"><br><input type="checkbox" name="사이다" value="1500" onclick="calc(this)">사이다 (1500원)</td>
+                        <td><img src="https://i.ibb.co/NZJSHR6/C3.png"><br><input type="checkbox" name="환타" value="1500" onclick="calc(this)">환타 (1500원)</td>
+                        <td><img src="https://i.ibb.co/X3Q0jN7/C4.png"><br><input type="checkbox" name="소주" value="3000" onclick="calc(this)">소주 (3000원)</td>
+                    </tr>
+                    <tr class="slt">
+                        <td><img src="https://i.ibb.co/yWbWL9s/C5.png"><br><input type="checkbox" name="맥주" value="3000" onclick="calc(this)">맥주 (3500원)</td>
+                    </tr>
+                </tbody>
+            <tbody>
+                <th>
+                    <h3 class="mainA" id="D1">&#91;추가메뉴&#93;</h3><hr>
+                </th>
+                    <tr class="slt">
+                        <td><img src=""><br><input type="checkbox" name="만두" value="2000" onclick="calc(this)">만두 (2000원)</td>
+                        <td><img src=""><br><input type="checkbox" name="미니 돈가스" value="2000" onclick="calc(this)">미니 돈가스 (2000원)</td>
+                        <td><img src=""><br><input type="checkbox" name="콜팝" value="3000" onclick="calc(this)">콜팝 (3000원)</td>
+                        <td><img src=""><br><input type="checkbox" name="김밥" value="1500" onclick="calc(this)">김밥 (1500원)</td>
+                    </tr>
+            </tbody>
+    </table>
+    <div id="JM">총 계산 금액<br><div style=color:black>주문하실 금액은 : </div><br>
+    <div id="back"></div>
+    <input type="text" id="sumtext" value="0" style="width:50px;height:30px;" />
+    <div><textarea id="order_list" style="width:200px;height:100px;"></textarea></div>
+    </div>
+</form>
+</body>
+</html>
+
